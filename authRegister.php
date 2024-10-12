@@ -11,8 +11,8 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
     {
         $host = "localhost";
         $database = "ecommerce";
-        $username = "root";
-        $password = "";
+        $dbusername = "root";
+        $dbpassword = "";
 
         $dsn = "mysql: host=$host;dbname=$database;";
         try {
