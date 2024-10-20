@@ -1,7 +1,16 @@
 <?php
-    require_once("includes\header.php")
+    session_start();
+    require_once("includes\header.php");
 
+    if(isset($_SESSION["error"])){
+        $messageErr=$_SESSION["error"];
+        unset($_SESSION["error"]);
+    };
 
+    if(isset($_SESSION["success"])){
+        $messageSucc=$_SESSION["success"];
+        unset($_SESSION["success"]);
+    };
 ?>
 
 
@@ -25,28 +34,23 @@
 
 
                     <!-- Message Response -->
-                    <?php if (isset($_GET["success"])){ ?>
-
-
-
+                    <?php if (isset($messageSucc)){ ?>
 
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <strong><?php echo $_GET["success"]; ?></strong>
+                    <strong><?php echo $messageSucc; ?></strong>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                     <?php } ?>
-   
 
 
-                    <?php if (isset($_GET["error"])){ ?>
+                    <?php if (isset($messageErr)){ ?>
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <strong><strong><?php echo $_GET["error"]; ?></strong></strong>
+                    <strong><strong><?php echo $messageErr; ?></strong></strong>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                     <?php } ?>
 
-
-                        <form action="authRegister.php" method="POST">
+                        <form action="app/auth/Register.php" method="POST">
                             <div class="mb-3">
                                 <label for="fullName" class="form-label">Full Name</label>
                                 <input type="text" class="form-control" id="fullName" name="fullName" placeholder="Enter your full name" required>
