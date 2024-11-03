@@ -1,25 +1,14 @@
 <?php
-    session_start();
-    require_once("includes\header.php");
-
-    if(isset($_SESSION["error"])){
-        $messageErr=$_SESSION["error"];
-        unset($_SESSION["error"]);
-    };
-
-    if(isset($_SESSION["success"])){
-        $messageSucc=$_SESSION["success"];
-        unset($_SESSION["success"]);
-    };
+   session_start();
+   require_once($_SERVER["DOCUMENT_ROOT"]."/app/config/Directories.php");
+   require_once(ROOT_DIR."includes/header.php");
 ?>
 
 
-    <!-- Navbar -->
-    <?php
-    require_once("includes\\navbar.php")
-
-
-?>
+<!-- Navbar -->
+<?php
+     require_once(ROOT_DIR."includes/navbar.php");
+    ?>
 
 
     <!-- Registration Form -->
@@ -34,21 +23,7 @@
 
 
                     <!-- Message Response -->
-                    <?php if (isset($messageSucc)){ ?>
-
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <strong><?php echo $messageSucc; ?></strong>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                    <?php } ?>
-
-
-                    <?php if (isset($messageErr)){ ?>
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <strong><strong><?php echo $messageErr; ?></strong></strong>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                    <?php } ?>
+                    
 
                         <form action="app/auth/Register.php" method="POST">
                             <div class="mb-3">
@@ -81,9 +56,7 @@
     </div>
 
 
-    <!-- Bootstrap 5 JS Bundle -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+    <?php require_once(ROOT_DIR."/includes/footer.php"); ?>
+
 
 

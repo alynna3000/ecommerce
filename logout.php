@@ -1,16 +1,14 @@
 <?php
-    session_start();
-    require_once("includes\header.php")
-
-
+   session_start();
+   require_once($_SERVER["DOCUMENT_ROOT"]."/app/config/Directories.php");
+   require_once(ROOT_DIR."includes/header.php");
 ?>
+
 
 <!-- Navbar -->
 <?php
-    require_once("includes\\navbar.php")
-
-
-?>
+     require_once(ROOT_DIR."includes/navbar.php");
+    ?>
 
 <?php
 if($_SERVER["REQUEST_METHOD"]=="POST")

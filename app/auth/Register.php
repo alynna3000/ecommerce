@@ -16,13 +16,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 
         try {
-            $stmt = $conn->prepare('INSERT INTO users (fullname, username, password, created_ai, updated_ai) VALUES (:p_fullname, :p_username, :p_password, NOW(), NOW()) ');
+            $stmt = $conn->prepare('INSERT INTO users (fullname, username, password, created_at, updated_at) VALUES (:p_fullname, :p_username, :p_password, NOW(), NOW()) ');
             $stmt->bindParam(':p_fullname',$fullname);
             $stmt->bindParam(':p_username',$username);
             $stmt->bindParam(':p_password',$password);
+            $password=password_hash($password,PASSWORD_BCRYPT);    
             $stmt->execute();
 
-            $password=password_hash($password,PASSWORD_BCRYPT);    
             header("location: /registration.php");
             $_SESSION["success"]="Resgistration Successful";
             exit;
