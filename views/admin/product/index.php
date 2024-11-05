@@ -30,6 +30,7 @@
             <a href="<?php echo BASE_URL; ?>views/admin/product/add.php" class="btn btn-success">Add New Product</a>
             </div>
 
+            <!-- Alerts -->
             <?php if (isset($messageSucc)){ ?>
 
             <div class="alert alert-success alert-dismissible fade show" role="alert">
