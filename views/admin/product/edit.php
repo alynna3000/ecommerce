@@ -145,7 +145,7 @@
                     <!-- Save Button (aligned to right) -->
                     <div class="row">
                         <div class="col-md-6 d-grid gap-2">
-                            <a href="<?php echo BASE_URL; ?>views/admin/products/index.php" class="btn btn-outline-secondary">Cancel</a>
+                            <a href="<?php echo BASE_URL; ?>views/admin/product/index.php" class="btn btn-outline-secondary">Cancel</a>
                         </div>
                         <div class="col-md-6 d-grid gap-2">
                             <button type="submit" class="btn btn-primary">Update Product</button>
