@@ -92,7 +92,7 @@
 
                         <!-- Add to Cart Button -->
                         <div class="d-grid gap-2">
-                            <button type="submit" class="btn btn-primary btn-lg">Add to Cart</button>
+                            <button type="submit" class="btn btn-primary btn-lg" <?php echo ($products["stocks"] <= 0 ? "disabled":""); ?>>Add to Cart</button>
                         </div>
                     </form>
                     

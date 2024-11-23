@@ -2,6 +2,27 @@
    session_start();
    require_once($_SERVER["DOCUMENT_ROOT"]."/app/config/Directories.php");
    require_once(ROOT_DIR."includes/header.php");
+
+   include(ROOT_DIR."app/config/DatabaseConnection.php");
+   $db=new DatabaseConnection();
+
+$carts=[];
+$id=$_GET['id'];
+$userId=$_SESSION["user_id"];
+$subtotal=0;
+$purchase_total=0;
+
+try{
+    $sql = "SELECT carts.id, products.product_name, carts.quantity, carts.unit_price, carts.total_price FROM carts 
+    LEFT JOIN products ON products.id=carts.product_id WHERE carts.user_id = $userId";
+
+    $stmt=$conn->prepare($sql);
+    $stmt->execute();
+    $carts=$stmt->fetchAll();
+
+} catch (Exception $e){
+    echo "Connection Failed: " . $e->getMessage();
+}
 ?>
 
 
@@ -27,24 +48,24 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <?php if($carts) { 
+                            foreach($carts as $indvCart)
+                            ?>
                         <tr>
-                            <td>Product 1</td>
-                            <td>1</td>
-                            <td>$50.00</td>
-                            <td>$50.00</td>
+                            <td><?php echo number_format($indvCart["product_name"]); ?></td>
+                            <td><?php echo number_format($indvCart["quantity"]); ?></td>
+                            <td><?php echo number_format($indvCart["unit_price"]); ?></td>
+                            <td><?php echo number_format($indvCart["total_price"]); ?></td>
                         </tr>
-                        <tr>
-                            <td>Product 2</td>
-                            <td>2</td>
-                            <td>$25.00</td>
-                            <td>$50.00</td>
-                        </tr>
-                        <tr>
-                            <td>Product 3</td>
-                            <td>1</td>
-                            <td>$30.00</td>
-                            <td>$30.00</td>
-                        </tr>
+                        <?php
+                        $subtotal=$subtotal*$indvCart["total_price"]; ?>
+
+                        <?php } else { ?>
+                            <tr>
+                                <td column="4">You do not have any products yet.</td>
+                            </tr>
+                        <?php } ?>
+
                     </tbody>
                 </table>
             </div>
@@ -57,11 +78,11 @@
                         <h4>Order Summary</h4>
                     </div>
                     <div class="card-body">
-                        <p>Subtotal: <span class="float-end">$130.00</span></p>
-                        <p>Shipping: <span class="float-end">$10.00</span></p>
+                    <?php if($carts) { ?>
+                        <p>Subtotal: <span class="float-end">PHP <?php echo number_format($subtotal,2); ?></span></p>
+                        <p>Shipping: <span class="float-end">PHP 50.00</span></p>
                         <hr>
-                        <h5>Total: <span class="float-end">$140.00</span></h5>
-
+                        <h5>Total: <span class="float-end"><?php echo number_format($subtotal+50); ?></span></h5>
 
                         <!-- Payment Method Selection -->
                         <div class="mt-4">
@@ -79,11 +100,12 @@
                             <label for="cardNumber" class="form-label">Card/Account Number</label>
                             <input type="text" class="form-control" id="cardNumber" placeholder="Enter your card or account number" required>
                         </div>
-
-
                         <!-- Confirm Payment Button -->
                         <div class="d-grid gap-2 mt-4">
-                            <button type="submit" class="btn btn-success">Confirm Payment</button>
+                        <button type="submit" class="btn btn-success">Confirm Payment</button>
+                            <?php } else { ?>
+
+                           <?php } ?>
                         </div>
                     </div>
                 </div>

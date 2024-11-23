@@ -23,7 +23,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if (trim($productId) == "" || trim($quantity) == "" || trim($userId) == "") 
     {
         $_SESSION["error"] = "Please fill in all the fields";
-        header("location: ".BASE_URL."views/products/product.php?id=".$product["id"]);
+        header("location: ".BASE_URL."views/product/product.php?id=".$product["id"]);
         exit();
     }
     
@@ -43,7 +43,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $totalPrice = (floatval($quantity)* floatval($product["unit_price"]));
         
         //INSERT INTO CART
-        $sql = "INSERT INTO carts(user_id, product_id, quantity, unit_price, total_price, created_at, updated_at) VALUES (:p_user_id, :p_product_id, :p_quantity, :p_unit_price, :p_total_price, NOW(), NOW()) ";
+        $sql = "INSERT INTO carts (user_id, product_id, quantity, unit_price, total_price, created_at, updated_at) VALUES (:p_user_id, :p_product_id, :p_quantity, :p_unit_price, :p_total_price, NOW(), NOW()) ";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':p_user_id',$userId);
         $stmt->bindParam(':p_product_id',$productId);
