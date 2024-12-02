@@ -23,7 +23,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if (trim($productId) == "" || trim($quantity) == "" || trim($userId) == "") 
     {
         $_SESSION["error"] = "Please fill in all the fields";
-        header("location: ".BASE_URL."views/product/product.php?id=".$product["id"]);
+        header("location: ".BASE_URL."views/products/product.php?id=".$product["id"]);
         exit();
     }
     
