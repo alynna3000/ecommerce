@@ -11,10 +11,10 @@ class DatabaseConnection{
     public function connectDB(){
 
 
-        $host = "localhost";
+       /* $host = "localhost";
         $database = "ecommerce";
         $dbusername = "root";
-        $dbpassword = "";
+        $dbpassword = ""; */
        
         $dsn = "mysql: host=$this->host;dbname=$this->database;";
         try {
