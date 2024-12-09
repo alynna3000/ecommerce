@@ -3,9 +3,9 @@
 
 class DatabaseConnection{
     private $host = "localhost";
-    private $database = "ecommerce";
-    private $dbusername = "root";
-    private $dbpassword = "";
+    private $database = "ecommerce_amarcial";
+    private $dbusername = "amarcial";
+    private $dbpassword = "Am4rc!al_2024";
     private $conn = null;
 
     public function connectDB(){
